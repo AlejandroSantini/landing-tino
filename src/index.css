@@ -109,6 +109,8 @@ section {
 .flex-col { flex-direction: column; }
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
 .justify-between { justify-content: space-between; }
 .flex-1 { flex: 1 1 0%; }
 .gap-2 { gap: 0.5rem; }
@@ -250,6 +252,7 @@ section {
 .blur-\[100px\] { filter: blur(100px); }
 
 .object-contain { object-fit: contain; }
+.aspect-video { aspect-ratio: 16 / 9; }
 
 .hidden { display: none; }
 
