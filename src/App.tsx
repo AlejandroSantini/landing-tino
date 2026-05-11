@@ -10,16 +10,13 @@ import {
   Zap,
   ChevronRight,
   Send,
-  Lock,
-  Menu,
-  X
+  Lock
 } from 'lucide-react';
 
 // --- Components ---
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
