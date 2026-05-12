@@ -216,13 +216,13 @@ const InteractiveChat = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="flex flex-row flex-wrap gap-2"
+              className="flex flex-col sm:flex-row flex-wrap gap-2"
             >
               {flows[currentLevel].map((opt: Option) => (
                 <button
                   key={opt.id}
                   onClick={() => handleOptionClick(opt)}
-                  className="flex-1 min-w-[120px] py-3 px-4 bg-surface-light hover:bg-surface border border-border rounded-xl text-sm font-semibold text-white transition-all active:scale-[0.98] text-center shadow-md"
+                  className="flex-1 min-w-[100px] sm:min-w-[120px] py-3 px-4 bg-surface-light hover:bg-surface border border-border rounded-xl text-sm font-semibold text-white transition-all active:scale-[0.98] text-center shadow-md"
                 >
                   {opt.label}
                 </button>
@@ -251,11 +251,11 @@ const App = () => {
   }, [adminImages.length]);
 
   return (
-    <div className="min-h-screen bg-bg selection:bg-primary/30 relative overflow-hidden">
+    <div className="min-h-screen bg-bg selection:bg-primary/30 relative overflow-x-hidden">
       {/* Background Glows */}
-      <div className="glow-spot -top-20 -left-20 bg-primary" />
-      <div className="glow-spot top-1/4 -right-20 bg-secondary" style={{ opacity: 0.1 }} />
-      <div className="glow-spot bottom-1/4 -left-20 bg-accent" style={{ opacity: 0.08 }} />
+      <div className="glow-spot -top-20 -left-20 bg-primary opacity-10" />
+      <div className="glow-spot top-1/4 -right-20 bg-secondary opacity-[0.05]" />
+      <div className="glow-spot bottom-1/4 -left-20 bg-accent opacity-[0.03]" />
       
       <Navbar />
 
