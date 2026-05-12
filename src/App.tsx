@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import type { ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Calendar, 
@@ -319,7 +320,7 @@ const App = () => {
                 title: "Orden Operativo", 
                 desc: "Olvidate del caos de mensajes. Tino organiza tu agenda y te avisa cuando un turno se confirma." 
               }
-            ].map((card: { icon: JSX.Element; title: string; desc: string }, i: number) => (
+            ].map((card: { icon: ReactNode; title: string; desc: string }, i: number) => (
               <motion.div 
                 key={i}
                 whileHover={{ y: -10 }}
@@ -430,7 +431,7 @@ const App = () => {
               { step: "1", title: "Registrate", icon: <Settings /> },
               { step: "2", title: "Pagá y Activá", icon: <Zap /> },
               { step: "3", title: "Configurá tu bot", icon: <Calendar /> }
-            ].map((s: { step: string; title: string; icon: JSX.Element }, i: number) => (
+            ].map((s: { step: string; title: string; icon: ReactNode }, i: number) => (
               <div key={i} className="flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-4 relative">
                   {s.icon}
