@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Calendar, 
@@ -9,7 +9,6 @@ import {
   TrendingUp, 
   Zap,
   ChevronRight,
-  Send,
   Lock
 } from 'lucide-react';
 
@@ -43,8 +42,24 @@ const Navbar = () => {
   );
 };
 
+interface Option {
+  id: string;
+  label: string;
+  response: string;
+  next: string;
+}
+
+interface Flows {
+  [key: string]: Option[];
+}
+
+interface Message {
+  role: 'bot' | 'user';
+  text: string;
+}
+
 const InteractiveChat = () => {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<Message[]>([
     { role: 'bot', text: '¡Hola! 👋 Soy Tino. Acá podés probar cómo lo verían tus clientes. ¿Qué flujo te gustaría ver?' }
   ]);
   const [isTyping, setIsTyping] = useState(false);
@@ -59,7 +74,7 @@ const InteractiveChat = () => {
 
   useEffect(scrollToBottom, [messages, isTyping]);
 
-  const flows = {
+  const flows: Flows = {
     main: [
       { id: 'turno', label: '📅 Pedir un turno', response: '¡Excelente! Manejo tu agenda automáticamente. ¿Para qué servicio buscás turno?', next: 'servicios' },
       { id: 'compra', label: '🛍️ Hacer una compra', response: '¡Buenísimo! Tengo el catálogo actualizado. ¿Qué producto te interesa?', next: 'productos' },
@@ -132,9 +147,9 @@ const InteractiveChat = () => {
     ]
   };
 
-  const [currentLevel, setCurrentLevel] = useState('main');
+  const [currentLevel, setCurrentLevel] = useState<keyof Flows>('main');
 
-  const handleOptionClick = (option: any) => {
+  const handleOptionClick = (option: Option) => {
     setShowOptions(false);
     setMessages(prev => [...prev, { role: 'user', text: option.label }]);
 
@@ -202,7 +217,7 @@ const InteractiveChat = () => {
               exit={{ opacity: 0, y: -10 }}
               className="flex flex-row flex-wrap gap-2"
             >
-              {(flows as any)[currentLevel].map((opt: any) => (
+              {flows[currentLevel].map((opt: Option) => (
                 <button
                   key={opt.id}
                   onClick={() => handleOptionClick(opt)}
@@ -304,7 +319,7 @@ const App = () => {
                 title: "Orden Operativo", 
                 desc: "Olvidate del caos de mensajes. Tino organiza tu agenda y te avisa cuando un turno se confirma." 
               }
-            ].map((card, i) => (
+            ].map((card: { icon: JSX.Element; title: string; desc: string }, i: number) => (
               <motion.div 
                 key={i}
                 whileHover={{ y: -10 }}
@@ -346,7 +361,7 @@ const App = () => {
                     title: "Control total y Estadísticas", 
                     desc: "Mirá cuántos turnos agendaste y ajustá horarios o servicios en tiempo real desde tu panel." 
                   }
-                ].map((item, i) => (
+                ].map((item: { title: string; desc: string }, i: number) => (
                   <div key={i} className="flex gap-4">
                     <div className="mt-1 w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center flex-none" style={{ minWidth: '24px' }}>
                       <ChevronRight size={14} className="text-secondary" />
@@ -415,7 +430,7 @@ const App = () => {
               { step: "1", title: "Registrate", icon: <Settings /> },
               { step: "2", title: "Pagá y Activá", icon: <Zap /> },
               { step: "3", title: "Configurá tu bot", icon: <Calendar /> }
-            ].map((s, i) => (
+            ].map((s: { step: string; title: string; icon: JSX.Element }, i: number) => (
               <div key={i} className="flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-4 relative">
                   {s.icon}
@@ -436,7 +451,7 @@ const App = () => {
             <p className="text-text-muted mb-8">Ideal para emprendimientos y PyMEs en crecimiento.</p>
             
             <ul className="grid sm:grid-cols-2 gap-4 text-left mb-10 max-w-2xl mx-auto">
-              {["Mensajes Ilimitados", "Agendamiento Automático", "Panel de Admin Completo", "Soporte Prioritario", "Analíticas Avanzadas", "Configuración Flexible", ].map((f, i) => (
+              {["Mensajes Ilimitados", "Agendamiento Automático", "Panel de Admin Completo", "Soporte Prioritario", "Analíticas Avanzadas", "Configuración Flexible", ].map((f: string, i: number) => (
                 <li key={i} className="flex items-center gap-2">
                   <CheckCircle2 size={18} className="text-secondary" /> <span>{f}</span>
                 </li>
