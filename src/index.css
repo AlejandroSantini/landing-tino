@@ -67,10 +67,21 @@ button {
 
 /* Glassmorphism Utility */
 .glass {
-  background: hsla(230, 25%, 15%, 0.7);
+  background: rgba(26, 31, 28, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
+}
+
+.glow-spot {
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
 }
 
 /* Animations */
